@@ -1,17 +1,17 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: ecr-k8s-secret-manager
+  name: {{ .Release.Name }}
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: ecr-k8s-secret-manager
+      app: {{ .Release.Name }}
   template:
     metadata:
       labels:
-        app: ecr-k8s-secret-manager
+        app: {{ .Release.Name }}
     spec:
       containers:
       - name: ecr-k8s-secret-manager
-        image: push 533267383984.dkr.ecr.eu-west-1.amazonaws.com/ecr-k8s-secret-manager:0.0.1
+        image: '{{ .Values.image }}:{{ .Values.tag }}'
